@@ -1,4 +1,5 @@
 # project-STOREHOUSE-MANAGEMENT-SYSTEM
+
 class Item:
     def __init__(self, name, description, price, quantity, category):
         self._name = name
@@ -10,7 +11,8 @@ class Item:
     def __str__(self):
         return f"{self._name} - {self._description} - ${self._price} - Quantity: {self._quantity} - Category: {self._category}"
 
-    # Getter methods
+# Getter methods
+    
     def get_name(self):
         return self._name
 
@@ -26,7 +28,7 @@ class Item:
     def get_category(self):
         return self._category
 
-    # Setter methods
+# Setter methods
     def set_name(self, name):
         self._name = name
 
@@ -125,15 +127,15 @@ def print_items_table(items):
         "Category": 15
     }
 
-    # Print column headers
+# Print column headers
     print(f"{'Name':<{column_widths['Name']}} {'Description':<{column_widths['Description']}} "
           f"{'Price ($)':>{column_widths['Price ($)']}} {'Quantity':>{column_widths['Quantity']}} "
           f"{'Category':<{column_widths['Category']}}")
 
-    # Print separator line
+# Print separator line
     print("-" * sum(column_widths.values()))
 
-    # Print information about each item
+# Print information about each item
     for item in items:
         print(f"{item.get_name():<{column_widths['Name']}} {item.get_description():<{column_widths['Description']}} "
               f"${item.get_price():>{column_widths['Price ($)']}.2f} {item.get_quantity():>{column_widths['Quantity']}} "
@@ -143,7 +145,7 @@ def print_items_table(items):
 if __name__ == "__main__":
     print("Welcome to the Store!")
 
-    # create the store and add items
+# create the store and add items
     storehouse = Storehouse()
     items = [
         Item("Laptop", "New Acer", 1050, 15, "Electronics"),
@@ -154,14 +156,14 @@ if __name__ == "__main__":
     for item in items:
         storehouse.add_item(item)
 
-    # represent the information about items
+# represent the information about items
     print("Items Information:")
     print_items_table(storehouse.items)
     print()  # an empty line for better readability
 
     customer_name = input("Enter your name: ")
 
-    # main cycle of making an order
+# main cycle of making an order
     while True:
         # creating an order
         order = storehouse.create_order(customer_name)
@@ -171,13 +173,13 @@ if __name__ == "__main__":
         else:
             print("No order was created.")
 
-        # making sure if customer wants to make any other order
+# making sure if customer wants to make any other order
         answer = input("Do you want to place another order? (yes/no): ").lower()
         if answer != "yes":
             print("Order(s) completed. Thank you!")
             break
 
-    # display a list of all orders of this customer
+# display a list of all orders of this customer
     customer_orders = storehouse.get_orders_by_customer(customer_name)
     if customer_orders:
         print(f"\nAll Orders by {customer_name}:")
@@ -187,6 +189,6 @@ if __name__ == "__main__":
     else:
         print(f"No orders found for {customer_name}.")
 
-    #display the remaining items in store after all orders
+#display the remaining items in store after all orders
     print("\nRemaining Items in Store:")
     print_items_table(storehouse.items)
